@@ -1,0 +1,67 @@
+1)RUNNING SUM OF 1 D ARRAY
+      class Solution {
+    public int[] runningSum(int[] nums) {
+
+        for(int i=1;i<nums.length;i++){
+            nums[i]=nums[i-1]+nums[i];
+
+        }
+        return nums;
+    }
+}
+
+2) SUM OF ALL ODD LENGTH SUBARRAYS
+      class Solution {
+    public int sumOddLengthSubarrays(int[] arr) {
+        int N = arr.length;
+        int[] PS = new int[N];
+        PS[0] = arr[0];
+        for(int i=1; i<N; i++){
+            PS[i] = arr[i] + PS[i-1];
+        }
+
+        int sum = PS[N-1];
+        for(int len=3; len<=N; len+=2){
+            sum += PS[len-1];
+            for(int i=len; i<N; i++){
+                sum += PS[i] - PS[i - len];
+            }
+        }
+        return sum;
+
+    }
+}
+3)FIND THE HIGHEST ALTITUDE
+      class Solution {
+    public int largestAltitude(int[] gain) {
+        int maxAltitude = 0;
+        int currentAltitude = 0;
+        
+        for (int i = 0; i < gain.length; i++) {
+            currentAltitude += gain[i];
+            maxAltitude = Math.max(maxAltitude, currentAltitude);
+        }
+        
+        return maxAltitude;
+    }
+}
+4)FIND THE MIDDLE INDEX In array
+      class Solution {
+    public int findMiddleIndex(int[] nums) {
+        int lsum[] = new int[nums.length]; 
+        int rsum[] = new int[nums.length]; 
+        lsum[0]=nums[0];
+        rsum[nums.length-1] = nums[nums.length-1];
+        for(int i=1; i<nums.length ;i++){
+            lsum[i] = lsum[i-1] + nums[i]; 
+        }
+        for(int i=nums.length-2; i>=0; i--){
+            rsum[i] = rsum[i+1] + nums[i];
+        }
+        for(int i=0; i<nums.length;i++){
+            if(lsum[i]==rsum[i])
+            return i; 
+        }
+        return -1;
+    }
+}
